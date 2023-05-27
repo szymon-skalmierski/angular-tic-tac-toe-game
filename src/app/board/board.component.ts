@@ -19,7 +19,7 @@ export class BoardComponent implements OnInit {
   newGame(){
     this.squares = Array(9).fill(null)
     this.winner = null;
-    this.isXNext = true;
+    this.isXNext = !!Math.round(Math.random());
   }
 
   get player() {
@@ -27,9 +27,11 @@ export class BoardComponent implements OnInit {
   }
 
   move(squareId: number){
-    if (!this.squares[squareId]){
-      this.squares[squareId] = this.player;
-      this.isXNext = !this.isXNext;
+    if(!this.winner){
+      if (!this.squares[squareId]){
+        this.squares[squareId] = this.player;
+        this.isXNext = !this.isXNext;
+      }
     }
     if(this.isFinished()){
       this.winner = this.isFinished();
@@ -50,6 +52,9 @@ export class BoardComponent implements OnInit {
     // Same values in a diagonal
     if(this.squares[0] && ((this.squares[0] === this.squares[4] && this.squares[0] === this.squares[8]) || (this.squares[2] === this.squares[4] && this.squares[2] === this.squares[6]))){
       return this.squares[4];
+    }
+    if(this.squares.indexOf(null)==-1){
+      return 'Draw';
     }
   }
 

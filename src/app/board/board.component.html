@@ -1,8 +1,11 @@
 <h1>Current player: {{ player }}</h1>
-<button nbButton status="warning" (click)="newGame()">Start new game</button>
+<button nbButton status="warning" fullWidth shape="semi-round" (click)="newGame()">Start new game</button>
 
-<h2 *ngIf="winner">
+<h2 *ngIf="winner==='O' || winner==='X'">
     Player {{ winner }} won the game!
+</h2>
+<h2 *ngIf="winner==='Draw'">
+    It's a draw!
 </h2>
 
 <main>
